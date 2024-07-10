@@ -39,7 +39,7 @@ const Home = () => {
 			<label htmlFor="exampleInputEmail1" className="form-label " style={{fontSize:"30px", paddingTop:"10px"}}>To Do List</label>
 			<div className="container-flex lavenderBlush border myStyle">
 				<form onSubmit={onSubmit}>
-					<div className="container-flex border-bottom">
+					<div className="container-flex border-bottom p-1">
 						<input onChange={(e) => setNewEntry(e.target.value)} value={newEntry} type="text" className="form-control lavenderBlush inputStyle" placeholder="Agregar tarea" id="exampleInput" aria-describedby="emailHelp"/>
 					</div>
 				</form>
