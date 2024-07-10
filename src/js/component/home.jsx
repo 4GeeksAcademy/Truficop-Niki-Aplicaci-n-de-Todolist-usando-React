@@ -12,7 +12,6 @@ const Home = () => {
 
 	function ratonEncimaDelElemento(index) {
         setEstado(index);
-		console.log(`Pasaste el cursor sobre: ${index}`);
     }
 
     function ratonFueraDelElemento() {
@@ -36,34 +35,41 @@ const Home = () => {
 
 	console.log(toDoList);
 	return (
-		<div className="container w-50">
-			<form onSubmit={onSubmit}>
-			<div className="mb-3 text-center">
-				<label htmlFor="exampleInputEmail1" className="form-label">To Do List</label>
-				<input onChange={(e) => setNewEntry(e.target.value)} value={newEntry} type="text" className="form-control" placeholder="Agregar tarea" id="exampleInput" aria-describedby="emailHelp"/>
+		<div className="container w-50 text-center">
+			<label htmlFor="exampleInputEmail1" className="form-label " style={{fontSize:"30px", paddingTop:"10px"}}>To Do List</label>
+			<div className="container-flex lavenderBlush border myStyle">
+				<form onSubmit={onSubmit}>
+					<div className="container-flex border-bottom">
+						<input onChange={(e) => setNewEntry(e.target.value)} value={newEntry} type="text" className="form-control lavenderBlush inputStyle" placeholder="Agregar tarea" id="exampleInput" aria-describedby="emailHelp"/>
+					</div>
+				</form>
+					<ul className="list-group list-group-flush">
+						{toDoList.length === 0 ? (
+							<p className="text-center pt-3">No hay tareas</p>
+						) : (
+							toDoList.map((item, index) => (
+								<li 
+									key={index} 
+									className="list-group-item lavenderBlush d-flex justify-content-between align-items-center" 
+									onMouseOver={() => ratonEncimaDelElemento(index)}
+									onMouseOut={() => ratonFueraDelElemento()}
+								>
+									{item}
+									{estado === index && (
+										<button className="btn" onClick={() => eliminarElemento(index)}>❌</button>
+									)}
+								</li>
+							))
+						)}
+					</ul>
+					<div className="pt-3 ps-2 border-top">
+						{conteo} Tareas pendientes
+					</div>
 			</div>
-			</form>
-			<ul className="list-group list-group-flush">
-				{toDoList.length === 0 ? (
-					<p className="text-center">No hay tareas</p>
-				) : (
-					toDoList.map((item, index) => (
-						<li 
-							key={index} 
-							className="list-group-item d-flex justify-content-between align-items-center" 
-							onMouseOver={() => ratonEncimaDelElemento(index)}
-							onMouseOut={() => ratonFueraDelElemento()}
-						>
-							{item}
-							{estado === index && (
-								<button className="btn btn-danger btn-sm" onClick={() => eliminarElemento(index)}>Eliminar</button>
-							)}
-						</li>
-					))
-				)}
-			</ul>
-			<div className="pt-3 border-top">{conteo} Items left</div>
+			<div style={{ height: "3px", borderRadius: "3px"}} className="lavenderBlush border mx-1"></div>
+			<div style={{ height: "3px", borderRadius: "3px"}} className="lavenderBlush border mx-2"></div>
 		</div>
+
 	);
 };
 
